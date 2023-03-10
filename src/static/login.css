@@ -1,0 +1,75 @@
+html{
+    background-size: cover; /* 背景图自适应盒子大小 */
+    background-repeat: no-repeat; /* 不重复平铺背景图片 */
+
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*background-color: #f5f5f5;*/
+}
+
+.login-container{
+    padding: 50px;
+    border-radius: 5px;
+    background-color: #555555;
+    position: absolute;
+    width: 300px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    backdrop-filter: blur(50px);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.email, .password{
+    color: #333333;
+    border: none;
+    font-weight: bold;
+    border-bottom: 1px solid black; /* 设置底部边框为1像素宽的黑色实线 */
+    font-size: 16px;
+    padding: 10px;
+    /*background-color: #f5f5f5;*/
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 20px);
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0);
+
+}
+
+.email:focus, .password:focus {
+    outline: none;
+}
+
+button {
+    /*background-color: #ffffff;*/
+    color: #333333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 100px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 3px solid black;
+    font-weight: bolder;
+
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+button:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+#signup{
+    left: 0px;
+}
+#login{
+    float: right;
+}

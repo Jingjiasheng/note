@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share</title>
+    <link rel="stylesheet" href="share.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+<div class="modal" style="display: none;">
+    <!-- 文本区块 -->
+    <section class="text-block">
+        <input class="section-id" hidden="hidden" value=""/>
+        <input class="edit section-title" readonly placeholder="添加便笺名"/>
+        <input class="edit section-bg" readonly placeholder="添加便笺展示背景图[url]"/>
+        <!-- 添加一个类名 "divider" -->
+        <textarea class="edit divider section-desc" readonly placeholder="添加便笺说明..."></textarea>
+        <!-- 每行都加上横线的效果 -->
+        <textarea class="edit divider section-detail" readonly placeholder="添加便笺内容..."></textarea>
+    </section>
+</div>
+
+
+</body>
+</html>
+<script src="share.js"></script>

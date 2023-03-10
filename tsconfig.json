@@ -1,0 +1,43 @@
+{
+  /**
+   * TypeScript Compiler Options
+   */
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noEmit": true,
+    "module": "CommonJS",
+    "target": "ES2021",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictBindCallApply": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "test"
+  ],
+  "exclude": [
+    "test/**/*.http",
+    "debug/**/*"
+  ],
+  /**
+   * Typedoc options
+   */
+  "typedocOptions": {
+    "name": "Questionnaire Editor",
+    "includeVersion": true,
+    "entryPoints": [
+      "./src"
+    ],
+    "entryPointStrategy": "Expand",
+    "out": "./outputs/docs",
+    "readme": "none",
+    "darkHighlightTheme": "dark-plus",
+    "hideGenerator": true
+  }
+}

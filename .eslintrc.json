@@ -1,0 +1,636 @@
+/**
+ * ESLint configurations and rules for TypeScript backend projects
+ *
+ * Author: Jiashengjing
+ * Created: 03,Feb,2023
+ * Description: ESLint recommended and customised rules for TypeScript projects.
+  							ESLint core rules, ESLint TypeScript rules, ESLint comment rules, ESLint TS-DOC rules
+								Import/Export rules, Promise rules, Unicorn rules and Jest rules.
+ * Dependencies:
+ *	1. @typescript-eslint/parser
+ *	2. eslint
+ *	3. @typescript-eslint/eslint-plugin
+ *	4. eslint-plugin-eslint-comments
+ *  5. eslint-plugin-tsdoc
+ *	6. eslint-plugin-import
+ *	7. eslint-plugin-promise
+ *	8. eslint-plugin-unicorn
+ *	9. eslint-plugin-jest
+ *	10. eslint-plugin-jest-formatting
+ *
+ */
+{
+  /** Root ESLint Configuration File */
+  "root": true,
+  /** Allow inline comments to change ESLint configuration rules */
+  // "noInlineConfig": true,
+  /** Predefined global variables */
+  "env": {
+    "browser": false,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  /** Installed pre-defined ESLint rules and plugins */
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:eslint-comments/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:jest-formatting/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "eslint-comments",
+    "eslint-plugin-tsdoc",
+    "promise",
+    "unicorn",
+    "jest",
+    "jest-formatting"
+  ],
+  /** TypeScript ESLint Parser Settings */
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "tsconfigRootDir": [
+      "."
+    ],
+    /** Must set project option to obtain type information */
+    "project": [
+      "tsconfig.json"
+    ],
+    "projectFolderIgnoreList": [
+      "**/node_modules/**",
+      "**/.*/**",
+      "config/**",
+      "build/**",
+      "outputs/**",
+      "logs/**",
+      "**/debug/**"
+    ]
+  },
+  /** ESLint Customised Rules */
+  "rules": {
+    /******************************************************************************************************************
+     ** eslint core rules
+     ** https://eslint.org/docs/rules/
+     *****************************************************************************************************************/
+    // Use console for logging into stdout/stderr
+    "no-console": 0,
+    // Disallow alerts
+    "no-alert": 2,
+    // Enforce double quotes
+    "quotes": 0,
+    "@typescript-eslint/quotes": [
+      2,
+      "double"
+    ],
+    // Enforce semicolons everywhere
+    "semi": "off",
+    "@typescript-eslint/semi": [
+      2,
+      "always"
+    ],
+    // Allow ONLY 2-space indention for readability on github webpage
+    "indent": 0,
+    "@typescript-eslint/indent": [
+      2,
+      2,
+      {
+        "flatTernaryExpressions": true,
+        "ignoredNodes": [
+          "ConditionalExpression"
+        ],
+        "SwitchCase": 1
+      }
+    ],
+    "@typescript-eslint/no-unsafe-argument": 0,
+    // Disallow tabs
+    "no-tabs": 2,
+    // Disallow tab-space mixtures in any case
+    "no-mixed-spaces-and-tabs": [
+      2,
+      false
+    ],
+    // One Empty line at most
+    "no-multiple-empty-lines": 2,
+    // Add spacing in braces and array brackets
+    "object-curly-spacing": 0,
+    "@typescript-eslint/object-curly-spacing": [
+      2,
+      "always"
+    ],
+    // Enforce spacing before/after array brackets
+    "array-bracket-spacing": [
+      2,
+      "always"
+    ],
+    // Enforce keyword spacing
+    "keyword-spacing": 0,
+    "@typescript-eslint/keyword-spacing": 2,
+    // Line breaks for objects,imports and exports
+    "object-curly-newline": [
+      2,
+      {
+        "ObjectExpression": {
+          "multiline": true,
+          "minProperties": 5
+        },
+        "ObjectPattern": {
+          "multiline": true
+        },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 3
+        }
+      }
+    ],
+    // Enforce curly braces on all blocks
+    "curly": [
+      2,
+      "all"
+    ],
+    // Enforce "stroustrup" block curly braces style (Use typescript-eslint plugin)
+    "brace-style": 0,
+    "@typescript-eslint/brace-style": [
+      2,
+      "stroustrup",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    // Enforce curly braces on all arrow functions
+    "arrow-body-style": [
+      2,
+      "as-needed"
+    ],
+    // Spacing around arrow
+    "arrow-spacing": 2,
+    // Max line length
+    "max-len": [
+      2,
+      {
+        "code": 128,
+        "tabWidth": 2,
+        "comments": 180
+      }
+    ],
+    "no-plusplus": [
+      1,
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-bitwise": 1,
+    // Warn switch-case fall through
+    "default-case": 1,
+    // Disallow function declarations to avoid misuage of 'this' keyword
+    "func-style": [
+      2,
+      "expression"
+    ],
+    // Name functions properly for recurssion
+    "func-names": [
+      2,
+      "as-needed",
+      {
+        "generators": "as-needed"
+      }
+    ],
+    // Disallow spacing between function name and the parenthesis
+    "func-call-spacing": 0,
+    "@typescript-eslint/func-call-spacing": 2,
+    // Use underscore '_' to explicitly specify unused variables or arguments, otherwise, unused vars are disallowed
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "all",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    // Disallow useless constructors
+    "no-useless-constructor": 0,
+    "@typescript-eslint/no-useless-constructor": 2,
+    // Enhance readability: Enforce variables and classes to be defined before usage
+    "no-use-before-define": 0,
+    "@typescript-eslint/no-use-before-define": [
+      2,
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true
+      }
+    ],
+    // Use dot-notation to access properties whenever possible
+    "dot-notation": 0,
+    "@typescript-eslint/dot-notation": 2,
+    // Enforce empty lines among class members
+    "lines-between-class-members": 0,
+    "@typescript-eslint/lines-between-class-members": 2,
+    // No duplicate class members
+    "no-dupe-class-members": 0,
+    "@typescript-eslint/no-dupe-class-members": 2,
+    // No duplicate imports (All imports from the same module should be completed only once)
+    "no-duplicate-imports": 0,
+    "@typescript-eslint/no-duplicate-imports": 2,
+    // No extra semicolons
+    "no-extra-semi": 0,
+    "@typescript-eslint/no-extra-semi": 2,
+    // Disallow "this" keyword outside of class-like objects
+    "no-invalid-this": 0,
+    "@typescript-eslint/no-invalid-this": 2,
+    // Disallow variable redeclaration
+    "no-redeclare": 0,
+    "@typescript-eslint/no-redeclare": 2,
+    // Enforce throwing Error or Error-based objects
+    "no-throw-literal": 0,
+    "@typescript-eslint/no-throw-literal": 2,
+    // Disallow async function without await expressions
+    "require-await": 0,
+    "@typescript-eslint/require-await": 2,
+    // Enforce spaces before function parenthesis, except for named functions
+    "space-before-function-paren": 0,
+    "@typescript-eslint/space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    /******************************************************************************************************************
+     ** @typescript-eslint rules
+     ** https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
+     *****************************************************************************************************************/
+    // Use interface to define object types
+    "@typescript-eslint/consistent-type-definitions": [
+      2,
+      "interface"
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      2,
+      {
+        "prefer": "type-imports"
+      }
+    ],
+    // Allow non null assertions
+    "@typescript-eslint/no-non-null-assertion": 0,
+    // Enforce using "as" instead of `<type>` for type assertions
+    "@typescript-eslint/consistent-type-assertions": [
+      2,
+      {
+        "assertionStyle": "as"
+      }
+    ],
+    // Use explicit function return types only for ts/tsx files
+    "@typescript-eslint/explicit-function-return-type": 0,
+    // Warn when function parameters are not properly typed
+    "@typescript-eslint/explicit-module-boundary-types": [
+      2,
+      {
+        "allowArgumentsExplicitlyTypedAsAny": true,
+        "allowDirectConstAssertionInArrowFunctions": true,
+        "allowHigherOrderFunctions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ],
+    // Semicolon style (default, preferred in TypeScript)
+    "@typescript-eslint/member-delimiter-style": [
+      2,
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+    // Enforce using function property style to declare function types in objects/interfaces
+    "@typescript-eslint/method-signature-style": [
+      2,
+      "property"
+    ],
+    "@typescript-eslint/naming-convention": [
+      2,
+      // {
+      //   // strictCamelCase as default
+      //   "selector": "default",
+      //   "format": ["strictCamelCase"],
+      //   "leadingUnderscore": "allow",
+      //   "trailingUnderscore": "allow"
+      // },
+      {
+        // strictCamelCase for all function declarations,methods,and accessors
+        "selector": [
+          "function",
+          "classMethod",
+          "typeMethod",
+          "accessor"
+        ],
+        "format": [
+          "strictCamelCase"
+        ],
+        "leadingUnderscore": "forbid",
+        "trailingUnderscore": "forbid"
+      },
+      {
+        // strictCamelCase for function expressions
+        "selector": [
+          "variable",
+          "parameter",
+          "classProperty",
+          "typeProperty"
+        ],
+        "types": [
+          "function"
+        ],
+        "format": [
+          "strictCamelCase"
+        ],
+        "leadingUnderscore": "forbid",
+        "trailingUnderscore": "forbid"
+      },
+      {
+        // CONSTANTS are in either UPPER_CASE (for environment variables) or snake_case (all other cases)
+        "selector": [
+          "variable"
+        ],
+        "modifiers": [
+          "const"
+        ],
+        "format": [
+          "UPPER_CASE",
+          "snake_case"
+        ],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        // All variables (except for constants) and properties are in snake_case
+        "selector": [
+          "variable",
+          "parameter",
+          "classProperty",
+          "parameterProperty",
+          "typeProperty"
+        ],
+        "format": [
+          "snake_case"
+        ],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "forbid"
+      },
+      {
+        // All Classes, Interfaces, Enum, Type Alias, Type Parameter are in StrictPascalCase
+        "selector": [
+          "typeLike"
+        ],
+        "format": [
+          "StrictPascalCase"
+        ],
+        "leadingUnderscore": "forbid",
+        "trailingUnderscore": "forbid"
+      },
+      {
+        // Members of Enumerables are in UPPER_CASE or StrictPascalCase
+        "selector": [
+          "enumMember"
+        ],
+        "format": [
+          "UPPER_CASE",
+          "StrictPascalCase"
+        ],
+        "leadingUnderscore": "forbid",
+        "trailingUnderscore": "forbid"
+      }
+    ],
+    // Disallow Type "any"
+    "@typescript-eslint/no-explicit-any": [
+      1,
+      {
+        "fixToUnknown": true,
+        "ignoreRestArgs": false
+      }
+    ],
+    // Warn when promises are not dealt with (dangling promises)
+    "@typescript-eslint/no-floating-promises": [
+      1,
+      {
+        "ignoreVoid": true,
+        "ignoreIIFE": true
+      }
+    ],
+    // Allow essential unsafe operations for compatibility with JavaScript libs
+    "@typescript-eslint/no-unsafe-assignment": 0,
+    "@typescript-eslint/no-unsafe-call": 0,
+    "@typescript-eslint/no-unsafe-member-access": 0,
+    "@typescript-eslint/no-unsafe-return": 0,
+    // Disallow any form of "require()" imports
+    "@typescript-eslint/no-require-imports": 2,
+    // "@typescript-eslint/no-var-requires": 2,
+    // Disallow equality comparison against boolean literals
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": 2,
+    // Disallow unnecessary type assertion
+    "@typescript-eslint/no-unnecessary-type-assertion": 2,
+    // Type constraints default to "unknown"
+    "@typescript-eslint/no-unnecessary-type-constraint": 2,
+    // Enforce using "!" as nullable assertion instead of "as"
+    "@typescript-eslint/non-nullable-type-assertion-style": 2,
+    "@typescript-eslint/prefer-includes": 1,
+    // Prefer nullish coalescing over "||" operator
+    "@typescript-eslint/prefer-nullish-coalescing": 1,
+    // Prefer "?." optional chain operator
+    "@typescript-eslint/prefer-optional-chain": 1,
+    // Prefer readonly modifier on unchanged class properties
+    "@typescript-eslint/prefer-readonly": 1,
+    // Warn when variables in string templates are not the string type
+    "@typescript-eslint/restrict-template-expressions": [
+      1,
+      {
+        "allowNumber": true,
+        "allowBoolean": false,
+        "allowAny": false,
+        "allowNullish": false
+      }
+    ],
+    // Warn when variables in "+" operand are not of the same type
+    "@typescript-eslint/restrict-plus-operands": [
+      1,
+      {
+        "checkCompoundAssignments": true
+      }
+    ],
+    // Enforce spaces around infix operators
+    "space-infix-ops": 0,
+    "@typescript-eslint/space-infix-ops": [
+      2,
+      {
+        "int32Hint": false
+      }
+    ],
+    // Disallow unbound methods to prevent issues with "this" keyword, except for static methods
+    "@typescript-eslint/unbound-method": [
+      0,
+      {
+        "ignoreStatic": true
+      }
+    ],
+    // Enforce Elements in Union and Intersection types are sorted
+    "@typescript-eslint/sort-type-union-intersection-members": 2,
+    // Enforce functions that return a Promise be marked as async
+    "@typescript-eslint/promise-function-async": [
+      2,
+      {
+        "allowedPromiseNames": [
+          "Thenable"
+        ]
+      }
+    ],
+    // Ban "///" to import types. Use "import" instead
+    "@typescript-eslint/triple-slash-reference": 2,
+    // Enforce spacing around type annotations
+    "@typescript-eslint/type-annotation-spacing": 2,
+    // Don't consider return value of type Promise<void> as misused promises
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        "checksVoidReturn": false
+      }
+    ],
+    /******************************************************************************************************************
+     ** import/export rules
+     ** https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules
+     *****************************************************************************************************************/
+    // Enforce importing orders to enhance readability
+    "import/order": [
+      2,
+      {
+        "newlines-between": "always"
+      }
+    ],
+    // Disable "default" exports, use ONLY named explicit exports
+    "import/prefer-default-export": 0,
+    "import/no-default-export": 2,
+    "import/no-unused-modules": 0,
+    "import/no-mutable-exports": 2,
+    // Use ONLY ES Modules
+    "import/no-commonjs": 2,
+    "import/no-duplicates": 2,
+    // Enforce all imports to stay at the top of a file and all exports to stay at the bottom of a file
+    "import/first": 2,
+    "import/exports-last": 2,
+    "import/group-exports": 2,
+    // Allow ONLY "dependencies" packages in "package.json" file
+    "import/no-extraneous-dependencies": [
+      2,
+      {
+        "devDependencies": true,
+        "optionalDependencies": false,
+        "peerDependencies": false,
+        "bundledDependencies": true
+      }
+    ],
+    /******************************************************************************************************************
+     ** eslint-comments rules
+     ** https://github.com/mysticatea/eslint-plugin-eslint-comments/tree/master/docs/rules
+     *****************************************************************************************************************/
+    // Allow eslint-comments, but need to follow the recommended ESLint rules from the eslint-comments plugin
+    /******************************************************************************************************************
+     ** eslint-promise rules
+     ** https://github.com/xjamundx/eslint-plugin-promise
+     *****************************************************************************************************************/
+    // Enforce the usage of async/await
+    "promise/prefer-await-to-callbacks": 1,
+    "promise/prefer-await-to-then": 1,
+    /******************************************************************************************************************
+     ** unicorn rules
+     ** https://github.com/sindresorhus/eslint-plugin-unicorn/tree/main/rules
+     *****************************************************************************************************************/
+    // Enforce file names to be named using snake_case
+    "unicorn/filename-case": [
+      2,
+      {
+        "case": "snakeCase"
+      }
+    ],
+    // Common abbreviations are known and readable
+    // Full names are verbose
+    "unicorn/prevent-abbreviations": 0,
+    // Allow usage of both null and undefined to be compatible with existing JS packages
+    "unicorn/no-null": 0,
+    // Allow usage of array reduce
+    "unicorn/no-array-reduce": 0,
+    // Allow non-module usage
+    "unicorn/prefer-module": 0,
+    // Allow not using node protocol
+    "unicorn/prefer-node-protocol": 0,
+    // Allow unseparated numeric values
+    "unicorn/numeric-separators-style": 0,
+    // Allow this in array method
+    "unicorn/no-array-method-this-argument": 0,
+    "unicorn/no-await-expression-member": 0,
+    // Enforce using "inludes" over "indexOf" method in string and array (disable unicorn rule to avoid conflicts)
+    "unicorn/prefer-includes": 0,
+    "unicorn/text-encoding-identifier-case": 0,
+    // If an object is defined as "thenable", once it's accidentally used in an await expression, it may cause problems
+    "unicorn/no-thenable": 0,
+    // Disallow process.exit()
+    "unicorn/no-process-exit": 0,
+    // Allow async IFEE
+    "unicorn/prefer-top-level-await": 0,
+    /******************************************************************************************************************
+     ** eslint jest and jest formatting rules
+     ** https://github.com/jest-community/eslint-plugin-jest/tree/master/docs/rules
+     ** https://github.com/dangreenisrael/eslint-plugin-jest-formatting/tree/master/docs/rules
+     *****************************************************************************************************************/
+    // Prefer toStrictEqual instead of toEqual
+    "jest/prefer-strict-equal": 1,
+    // Warn when the number of assertions are not given in testing async functions
+    "jest/prefer-expect-assertions": [
+      1,
+      {
+        "onlyFunctionsWithAsyncKeyword": true
+      }
+    ],
+    /******************************************************************************************************************
+     ** eslint ts-doc rules
+     ** https://github.com/microsoft/tsdoc/tree/master/eslint-plugin
+     *****************************************************************************************************************/
+    "tsdoc/syntax": 1,
+    // disallow trailing commas
+    "comma-dangle": [
+      2,
+      "never"
+    ]
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files (Avoid conflicts for js code)
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          2,
+          {
+            "allowDirectConstAssertionInArrowFunctions": true
+          }
+        ]
+      }
+    }
+  ]
+}

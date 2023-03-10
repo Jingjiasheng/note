@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Writing & Life</title>
+    <link rel="stylesheet" href="style.css">
+<!--    <link rel="stylesheet" href="scorll.css">-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>-->
+<!--    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>-->
+</head>
+<body>
+
+<div class="context-menu" id="context-menu">
+    <ul>
+        <li id="note-delete">删除此便笺</li>
+        <li id="note-edit">修改此便笺</li>
+        <li id="note-share">分享此便笺</li>
+        <li id="note-copy">复制此便笺</li>
+        <li id="logout">退出此账号</li>
+    </ul>
+</div>
+
+<div class="masonry">
+    <div class="item add-item">
+        <label class="zhanwei"> </label>
+
+        <div class="dibu">
+            <!--     将需要拉伸的元素固定在下面       -->
+            <h2>新建一个便笺</h2>
+            <p class="desc">
+                此处将展示您创建的便笺的介绍信息，如果你需要新建一个便笺的话请将光标移到此处，并根据提示双击哦:)
+            </p>
+        </div>
+        <!--   这里藏着文本框     -->
+        <p class="detail add-item">
+            此处将在您创建完成便笺之后展示您的便笺的内容，如果内容超长的话请双击，将会打开便笺查看详情，如果想要新建便笺的话请在此处进行双击的操作,记住是双击哦:)
+        </p>
+
+    </div>
+</div>
+
+<div class="modal" style="display: none;">
+<!--    <img src="http://source.unsplash.com/random/400x600" alt="Image">-->
+    <!-- 文本区块 -->
+    <section class="text-block">
+        <input class="section-id" hidden="hidden" value=""/>
+        <input class="edit section-title" readonly placeholder="添加便笺名"/>
+        <input class="edit section-bg" readonly placeholder="添加便笺展示背景图[url]"/>
+        <!-- 添加一个类名 "divider" -->
+        <textarea class="edit divider section-desc" readonly placeholder="添加便笺说明..."></textarea>
+        <!-- 每行都加上横线的效果 -->
+        <textarea class="edit divider section-detail" readonly placeholder="添加便笺内容..."></textarea>
+    </section>
+</div>
+
+
+</body>
+</html>
+<script src="index.js"></script>
