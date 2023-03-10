@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "这是一个轻量级的网页便笺应用",
   "main": "www.ts",
+  "repository": {
+    "url": "git@github.com:Jingjiasheng/note.git"
+  },
   "scripts": {
     "start": "dotenv -e ./config/var.env -- cross-var ts-node src/bin/www.ts"
   },

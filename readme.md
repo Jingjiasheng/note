@@ -57,7 +57,7 @@
 
 > - git拉取仓库源码，或者下载解压源码：
 > ```bash
-> git clone git@xxxxxxx.git
+> git clone git@github.com:Jingjiasheng/note.git
 > ```
 
 > - 修改相关配置文件
@@ -83,7 +83,7 @@
 
 ### docker 部署
 > - 拉取docker镜像
->   > `docker pull xxxx`
+>   > `docker pull ghcr.io/jingjiasheng/note:1.0.0`
 >   - 运行镜像(相关参数的解释见上面)
 >   > ```dockerfile 
 >   > docker run --name mynote 
@@ -94,5 +94,5 @@
 >   > -e TOKEN_SIGN_SECRET=note 
 >   > -e BCRYPT_SALT_ROUNDS 
 >   > -e TOKEN_EXPIRE=24 
->   > 镜像ID
+>   > ghcr.io/jingjiasheng/note:1.0.0
 >   > ```
