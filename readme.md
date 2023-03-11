@@ -1,4 +1,11 @@
 # 项目介绍
+
+**在线体验地址:**
+> 邮箱: `test@test.com` <br>
+> 密码: `123456` <br>
+> 地址: https://note.automan.vip
+<hr>
+
 **项目用途:** 
 > 本项目是一款持久化的网页便笺管理器，以轻量级为开发主要核心目的，追求简便，隐私，易用；它可以用来保存密码，配置文件，任务内容，计划列表，重要信息等[个人感觉安全等级较高，但仍然不建议将价值较高的数据存放此处]
 <hr>
@@ -93,6 +100,6 @@
 >   > -e DB_PATH=/data/database.sqlie 
 >   > -e TOKEN_SIGN_SECRET=note 
 >   > -e BCRYPT_SALT_ROUNDS 
->   > -e TOKEN_EXPIRE=24 
+>   > -e TOKEN_EXPIRE=24 ~
 >   > ghcr.io/jingjiasheng/note:1.0.0
 >   > ```
