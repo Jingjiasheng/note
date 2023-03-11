@@ -95,7 +95,7 @@
 >   > ```dockerfile 
 >   > docker run --name mynote 
 >   > -p:外部端口:3333 
->   > -v /data/sqlite:/data/sqlite 
+>   > -v /local/data:/data 
 >   > -e PORT=3333 
 >   > -e DB_PATH=/data/database.sqlie 
 >   > -e TOKEN_SIGN_SECRET=note 
