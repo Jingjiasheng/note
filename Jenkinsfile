@@ -4,10 +4,13 @@ pipeline{
         nodejs 'node18'
     }
     stages{
+        environment {
+            SUDO_PWD = credentials('sudo-pwd')
+        }
         stage('pull code'){
             steps{
-                sh 'sudo rm -rf public'
-                sh 'sudo rm -rf logs'
+                sh 'echo $SUDO_PWD | sudo -S rm -rf public'
+                sh 'echo $SUDO_PWD | sudo rm -rf logs'
                 git branch:'main',credentialsId:'NOTE-JENKINS',url:'git@github.com:Jingjiasheng/note.git'
             }
         }
